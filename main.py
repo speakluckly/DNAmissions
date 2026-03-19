@@ -51,15 +51,18 @@ class DnaMissions(Star):
             "mod": raw_mission[2] if len(raw_mission) > 2 else "",
         }
 
-    def format_missions_text(self, missions_raw):
-        """将密函列表格式化为文本"""
-        if not missions_raw:
-            return "暂无密函数据"
-        lines = []
-        for idx, raw in enumerate(missions_raw, 1):
-            m = self.parse_mission(raw)
-            lines.append(f"{idx}. 人物：{m['character']} | 武器：{m['weapon']} | 魔之楔：{m['mod']}")
-        return "📋 当前密函列表：\n" + "\n".join(lines)
+   def format_missions_text(self, missions_raw):
+    if not missions_raw or len(missions_raw) < 3:
+        return "暂无密函数据"
+    # 假设 missions_raw[0] 是角色列表，[1] 是武器列表，[2] 是魔之楔列表
+    roles = missions_raw[0]
+    weapons = missions_raw[1]
+    mods = missions_raw[2]
+    lines = []
+    lines.append("👤 角色：" + "、".join(roles))
+    lines.append("🔫 武器：" + "、".join(weapons))
+    lines.append("🌀 魔之楔：" + "、".join(mods))
+    return "📋 当前密函可用的内容：\n" + "\n".join(lines)
 
     async def _push_scheduler(self):
         """定时任务：每小时的第 push_hour_offset 分钟推送"""

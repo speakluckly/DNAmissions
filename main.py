@@ -3,7 +3,8 @@ import aiohttp
 from datetime import datetime
 from astrbot.api.event import filter, AstrMessageEvent
 from astrbot.api.star import Context, Star, register
-from astrbot.api.message_components import Plain, MessageChain
+from astrbot.api.message_components import Plain
+from astrbot.api.event import MessageChain
 from astrbot.api import logger
 
 @register("dna_missions", "你的名字", "DNA Builder 密函自动推送与查询插件", "1.0.0")

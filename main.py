@@ -50,18 +50,22 @@ class DnaMissions(Star):
             "weapon": raw_mission[1] if len(raw_mission) > 1 else "",
             "mod": raw_mission[2] if len(raw_mission) > 2 else "",
         }
-    def format_missions_text(self, missions_raw):
+   def format_missions_text(self, missions_raw):
+    """格式化密函数据，按类别显示"""
     if not missions_raw or len(missions_raw) < 3:
-        return "暂无密函数据"
-    # 假设 missions_raw[0] 是角色列表，[1] 是武器列表，[2] 是魔之楔列表
-    roles = missions_raw[0]
-    weapons = missions_raw[1]
-    mods = missions_raw[2]
-    lines = []
-    lines.append("👤 角色：" + "、".join(roles))
-    lines.append("🔫 武器：" + "、".join(weapons))
-    lines.append("🌀 魔之楔：" + "、".join(mods))
-    return "📋 当前密函可用的内容：\n" + "\n".join(lines)
+        return "密函数据格式异常"
+    
+    # 按顺序取出三个数组：人物、武器、魔之楔
+    characters = missions_raw[0] if len(missions_raw) > 0 else []
+    weapons = missions_raw[1] if len(missions_raw) > 1 else []
+    mods = missions_raw[2] if len(missions_raw) > 2 else []
+    
+    # 将列表转换为逗号分隔的字符串
+    char_str = "、".join(characters) if characters else "无"
+    weapon_str = "、".join(weapons) if weapons else "无"
+    mod_str = "、".join(mods) if mods else "无"
+    
+    return f"👤 人物：{char_str}\n🔫 武器：{weapon_str}\n🌀 魔之楔：{mod_str}"
 
     async def _push_scheduler(self):
         """定时任务：每小时的第 push_hour_offset 分钟推送"""

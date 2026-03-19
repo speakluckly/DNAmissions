@@ -50,8 +50,7 @@ class DnaMissions(Star):
             "weapon": raw_mission[1] if len(raw_mission) > 1 else "",
             "mod": raw_mission[2] if len(raw_mission) > 2 else "",
         }
-
-   def format_missions_text(self, missions_raw):
+    def format_missions_text(self, missions_raw):
     if not missions_raw or len(missions_raw) < 3:
         return "暂无密函数据"
     # 假设 missions_raw[0] 是角色列表，[1] 是武器列表，[2] 是魔之楔列表
